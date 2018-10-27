@@ -46,7 +46,8 @@ func (*Sipher_code) GetInitialReplaceMatrix() [8][8]int {
 
 func (*Sipher_code) getCN(round int) []int {
 	displacement := getDisplacements(round)
-	CN := pc_1[displacement:28]
+	CN := make([]int, 28-displacement)
+	copy(CN, pc_1[displacement:28])
 	for i := 0; i < displacement; i++ {
 		CN = append(CN, pc_1[i])
 	}
@@ -55,7 +56,8 @@ func (*Sipher_code) getCN(round int) []int {
 
 func (*Sipher_code) getDN(round int) []int {
 	displacement := getDisplacements(round)
-	DN := pc_1[28+displacement:]
+	DN := make([]int, 28-displacement)
+	copy(DN, pc_1[28+displacement:])
 	for i := 0; i < displacement; i++ {
 		DN = append(DN, pc_1[28+i])
 	}
@@ -71,15 +73,22 @@ func (sipher_code *Sipher_code) getCNDN(round int) []int {
 	return CNDN
 }
 
-func (*Sipher_code) replace(CNDN []int) []int {
-	CNDN_replace := make([]int, 0)
-	for i := 0; i < 48; i++ {
-		CNDN_replace = append(CNDN_replace, CNDN[pc_2[i]-1])
+func (*Sipher_code) replace(CNDN []int) string {
+
+	initial_sipher_code_replace := ""
+	for i := 0; i < 56; i++ {
+		initial_sipher_code_replace += string(initial_sipher_code[CNDN[i]-1])
 	}
-	return CNDN_replace
+
+	sipher_code_replace := ""
+	for i := 0; i < 48; i++ {
+		sipher_code_replace += string(initial_sipher_code_replace[pc_2[i]-1])
+	}
+
+	return sipher_code_replace
 }
 
-func (sipher_code *Sipher_code) GetSipherCodeN(round int) []int {
+func (sipher_code *Sipher_code) GetSipherCodeN(round int) string {
 	CNDN := sipher_code.getCNDN(round)
 	return sipher_code.replace(CNDN)
 }

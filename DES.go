@@ -25,7 +25,6 @@ func main() {
 	// Encryption processing
 	// PC-1(子密钥的生成)
 	for i := 1; i <= 16; i++ {
-		sipherCodeN := sipherCode.GetSipherCodeN(i)
-		fmt.Println(sipherCodeN)
+		fmt.Println(sipherCode.GetSipherCodeN(i))
 	}
 }
