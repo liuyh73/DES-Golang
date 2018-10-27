@@ -7,11 +7,13 @@ import (
 )
 
 func main() {
-	key := "0001001100110100010101110111100110011011101111001101111111110001"
-	clear_text := "0010010110100011010001011100011001101001101010111100110111101111"
+	var key string
+	var clear_text string
+	fmt.Print("please input secret key with 8 bits：")
+	fmt.Scanf("%s\n", &key)
+	fmt.Print("please input the clear text: ")
+	fmt.Scanf("%s\n", &clear_text)
 	cipher_text := des.Encrypt(clear_text, key)
-	fmt.Println(cipher_text)
-	plain_text := des.Decrypt(cipher_text, key)
-	fmt.Println(plain_text)
-	fmt.Println(clear_text)
+	fmt.Println("明文加密后:", cipher_text)
+	fmt.Println("密文解密后:", des.Decrypt(cipher_text, key))
 }
