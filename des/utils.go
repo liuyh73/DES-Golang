@@ -81,16 +81,6 @@ func hexadecimalToBinary(data byte) string {
 	return ""
 }
 
-func getRow(num1, num2 byte) int {
-	row, _ := strconv.ParseInt(string(num1)+string(num2), 2, 64)
-	return int(row)
-}
-
-func getColumn(column string) int {
-	col, _ := strconv.ParseInt(column, 2, 64)
-	return int(col)
-}
-
 func reverse(keys []string) []string {
 	keys_reverse := make([]string, 0)
 	for i := len(keys) - 1; i >= 0; i-- {

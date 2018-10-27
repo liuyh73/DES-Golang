@@ -1,5 +1,7 @@
 package des
 
+import "strconv"
+
 var initial_replace_matrix = [8][8]int{
 	{58, 50, 42, 34, 26, 18, 10, 2},
 	{60, 52, 44, 36, 28, 20, 12, 4},
@@ -193,4 +195,14 @@ func getPBox() [32]int {
 
 func getReverseReplace() [64]int {
 	return reverse_replace
+}
+
+func getRow(num1, num2 byte) int {
+	row, _ := strconv.ParseInt(string(num1)+string(num2), 2, 64)
+	return int(row)
+}
+
+func getColumn(column string) int {
+	col, _ := strconv.ParseInt(column, 2, 64)
+	return int(col)
 }
