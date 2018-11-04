@@ -150,20 +150,20 @@ func getCNDN(round int) []int {
 
 func replace(CNDN []int, key string) string {
 
-	initial_sipher_code_replace := ""
+	initial_cipher_code_replace := ""
 	for i := 0; i < 56; i++ {
-		initial_sipher_code_replace += string(key[CNDN[i]-1])
+		initial_cipher_code_replace += string(key[CNDN[i]-1])
 	}
 
-	sipher_code_replace := ""
+	cipher_code_replace := ""
 	for i := 0; i < 48; i++ {
-		sipher_code_replace += string(initial_sipher_code_replace[pc_2[i]-1])
+		cipher_code_replace += string(initial_cipher_code_replace[pc_2[i]-1])
 	}
 
-	return sipher_code_replace
+	return cipher_code_replace
 }
 
-func getSipherCodeN(round int, key string) string {
+func getCipherCodeN(round int, key string) string {
 	CNDN := getCNDN(round)
 	return replace(CNDN, key)
 }
@@ -172,7 +172,7 @@ func getKeys(key string) []string {
 	// Encryption processing
 	keys := make([]string, 0)
 	for i := 1; i <= 16; i++ {
-		keys = append(keys, getSipherCodeN(i, key))
+		keys = append(keys, getCipherCodeN(i, key))
 	}
 	return keys
 }
