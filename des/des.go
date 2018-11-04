@@ -23,7 +23,7 @@ func Decrypt(cipher_text, key string) string {
 }
 
 func des(text, key string, tag bool) string {
-	if len(key) < 8 {
+	if len(key) != 8 {
 		fmt.Println("The secret key need to be 8 bits.")
 		os.Exit(0)
 	}
